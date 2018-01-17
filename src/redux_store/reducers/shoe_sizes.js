@@ -1,7 +1,6 @@
 const shoe_sizes = (state = {}, action) => {
   switch (action.type) {
     case "ADD_SHOE_SIZES":
-      console.log(action.sizes);
       return {
         ...state,
         ...action.sizes.data[0],

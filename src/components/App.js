@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 //custom imports
 import StackedBarChart from "./StackedBarChart";
+import SmallScreenNotice from "./SmallScreenNotice";
 import {
   mapStateToProps,
   mapDispatchToProps
@@ -22,13 +23,16 @@ class App extends Component {
     } = this.props.actions;
 
     return (
-      <StackedBarChart
-        title={title}
-        nextPage={nextPage}
-        sizes={sizes}
-        addShoeSizesAsync={addShoeSizesAsync}
-        addSubsequentShoeSizesAsync={addSubsequentShoeSizesAsync}
-      />
+      <section className="bar-chart">
+        <StackedBarChart
+          title={title}
+          nextPage={nextPage}
+          sizes={sizes}
+          addShoeSizesAsync={addShoeSizesAsync}
+          addSubsequentShoeSizesAsync={addSubsequentShoeSizesAsync}
+        />
+        <SmallScreenNotice />
+      </section>
     );
   }
 }

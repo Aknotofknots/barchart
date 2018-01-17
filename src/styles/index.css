@@ -1,6 +1,44 @@
-body {
+body,
+html {
+  font-family: Lato, sans-serif;
   margin: 0;
   padding: 0;
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
+}
+
+.bar-chart {
+  visibility: visible;
+}
+.bar-chart-visibility-notification {
+  visibility: hidden;
+}
+.next-page {
+  padding: 6px;
+  background-color: transparent;
+  border: none;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+  outline-style: none;
+  border-color: transparent;
+  position: absolute;
+  top: 85%;
+  right: 46%;
+  font-family: Lato, sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+@media screen and (orientation: portrait) and (max-width: 400px) {
+  .bar-chart {
+    visibility: hidden;
+  }
+  .bar-chart-visibility-notification {
+    visibility: visible;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 768px) {
+  .next-page {
+    margin: 0 auto;
+    font-size: 14px;
+  }
 }
