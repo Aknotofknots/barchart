@@ -133,6 +133,7 @@ class StackedBarChart extends Component {
           >
             {this.renderBar()}
           </VictoryStack>
+          <VictoryAxis dependentAxis />
           <VictoryAxis
             style={this.styles.horizontalAxisLabel}
             tickFormat={this.getShoeSizes().sort((last, next) => last - next)}
