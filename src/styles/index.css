@@ -1,6 +1,7 @@
 body,
 html {
   font-family: Lato, sans-serif;
+  font-weight: 300;
   margin: 0;
   padding: 0;
 }
@@ -27,7 +28,7 @@ html {
   font-size: 20px;
 }
 
-@media screen and (orientation: portrait) and (max-width: 400px) {
+@media screen and (orientation: portrait) and (max-width: 416px) {
   .bar-chart {
     visibility: hidden;
   }

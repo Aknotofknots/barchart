@@ -8,7 +8,7 @@ import App from "./components/App";
 import store from "./redux_store/store";
 import ErrorBoundry from "./components/ErrorBoundry";
 
-//import "./styles/index.css";
+//styles
 import "./styles/index.css";
 import registerServiceWorker from "./registerServiceWorker";
 

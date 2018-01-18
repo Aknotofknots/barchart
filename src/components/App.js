@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
-//custom imports
 import StackedBarChart from "./StackedBarChart";
 import SmallScreenNotice from "./SmallScreenNotice";
 import {
   mapStateToProps,
   mapDispatchToProps
 } from "../redux_store/store_mapping";
-
-//environment variables
 require("dotenv").config();
 
 class App extends Component {
