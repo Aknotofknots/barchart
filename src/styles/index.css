@@ -5,7 +5,6 @@ html {
   margin: 0;
   padding: 0;
 }
-
 .bar-chart {
   visibility: visible;
 }
@@ -22,7 +21,7 @@ html {
   border-color: transparent;
   position: absolute;
   top: 85%;
-  right: 46%;
+  right: 3%;
   font-family: Lato, sans-serif;
   font-weight: 300;
   font-size: 20px;
