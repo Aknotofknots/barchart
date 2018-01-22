@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import StackedBarChart from "./StackedBarChart";
+import BarChart from "./BarChart";
 import SmallScreenNotice from "./SmallScreenNotice";
 import PaginationButton from "./PaginationButton";
 import ErrorView from "./ErrorView";
@@ -40,7 +40,7 @@ class App extends Component {
         {requestHasError ? (
           <ErrorView addShoeSizesAsync={addShoeSizesAsync} />
         ) : (
-          <StackedBarChart
+          <BarChart
             title={title}
             sizes={sizes}
             addShoeSizesAsync={addShoeSizesAsync}

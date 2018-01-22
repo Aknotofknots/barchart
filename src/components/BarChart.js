@@ -75,7 +75,10 @@ class StackedBarChart extends Component {
   render() {
     const horizontalLength = this.getFeetLengthAmount().length;
     const [system, gender] = this.props.title;
-    const title = `Shoe Sizes Distribution \n ${system} - ${gender}`;
+    const title =
+      system !== undefined
+        ? `Shoe Sizes Distribution \n ${system} - ${gender}`
+        : "";
 
     return (
       <React.Fragment>
