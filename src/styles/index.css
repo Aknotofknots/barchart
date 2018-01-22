@@ -3,16 +3,20 @@ html {
   font-family: Lato, sans-serif;
   font-weight: 300;
   margin: 0;
-  padding: 0;
 }
 .bar-chart {
   visibility: visible;
 }
 .bar-chart-visibility-notification {
   visibility: hidden;
+  font-family: Lato, sans-serif;
+  font-weight: 300;
 }
 .next-page {
   padding: 6px;
+  font-size: 20px;
+  font-family: Lato, sans-serif;
+  font-weight: 300;
   background-color: transparent;
   border: none;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
@@ -20,14 +24,33 @@ html {
   outline-style: none;
   border-color: transparent;
   position: absolute;
-  top: 85%;
-  right: 3%;
+  top: 678px;
+  right: 7%;
+}
+
+.next-page:hover {
+  background-color: #4a9fd7;
+}
+
+.reload-page {
+  padding: 6px;
+  background-color: transparent;
+  border: none;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+  outline-style: none;
+  border-color: transparent;
   font-family: Lato, sans-serif;
   font-weight: 300;
   font-size: 20px;
+  width: 50%;
 }
 
-@media screen and (orientation: portrait) and (max-width: 416px) {
+.reload-page:hover {
+  background-color: #4a9fd7;
+}
+
+@media screen and (orientation: portrait) and (max-width: 418px) {
   .bar-chart {
     visibility: hidden;
   }
@@ -36,9 +59,17 @@ html {
     text-align: center;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 770px) {
   .next-page {
-    margin: 0 auto;
-    font-size: 14px;
+    font-size: 12px;
+    top: 87%;
+  }
+}
+@media screen and (min-width: 770px) and (max-width: 814px) {
+  .next-page {
+    font-size: 10px;
+    padding: 4px;
+    top: 3%;
+    left: 47%;
   }
 }

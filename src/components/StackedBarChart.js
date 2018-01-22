@@ -8,40 +8,36 @@ import {
   VictoryLabel,
   VictoryGroup
 } from "victory";
-import PaginationButton from "./PaginationButton";
 import config from "../config/config";
 
 class StackedBarChart extends Component {
-  state = {
-    clicked: false
-  };
   componentDidMount() {
     this.props.addShoeSizesAsync();
   }
 
   renderBar = () => {
     const widths = [];
-    const shoeSizes = map(this.props.sizes, width => {
-      //rename this to shoeLenghts
+    const shoeLengths = map(this.props.sizes, width => {
       widths.push(Object.keys(width));
       return width;
     });
 
-    let sorted = [];
-    const bars = this.createBars(widths, shoeSizes);
+    let sortedBars = [];
+    const bars = this.createBars(widths, shoeLengths);
     config.stackColors.map((color, index) => {
-      sorted.push(
+      sortedBars.push(
         bars.map(bar => {
           return bar.find(bar => bar.label === color[0]);
         })
       );
     });
 
-    return sorted.map((barArray, index) => {
+    return sortedBars.map((barArray, index) => {
       return barArray.filter(barValues => barValues);
     });
   };
-  createBars = (widths, shoeSizes) => {
+
+  createBars = (widths, shoeLengths) => {
     return widths.map((width, widthPos) => {
       return width.map((value, position) => {
         const barValues = {
@@ -49,7 +45,7 @@ class StackedBarChart extends Component {
         };
         return {
           x: barValues.barPosition,
-          y: shoeSizes[widthPos][value],
+          y: shoeLengths[widthPos][value],
           fill: barValues.barColor,
           label: value
         };
@@ -76,23 +72,10 @@ class StackedBarChart extends Component {
     });
   };
 
-  handlePagination = () => {
-    this.setState({
-      clicked: !this.state.clicked
-    });
-
-    this.state.clicked
-      ? this.props.addShoeSizesAsync()
-      : this.props.addSubsequentShoeSizesAsync(this.props.nextPage);
-  };
-
   render() {
     const horizontalLength = this.getFeetLengthAmount().length;
     const [system, gender] = this.props.title;
-    const title =
-      system !== undefined
-        ? `Shoe Sizes Distribution \n ${system} - ${gender}`
-        : "loading...";
+    const title = `Shoe Sizes Distribution \n ${system} - ${gender}`;
 
     return (
       <React.Fragment>
@@ -101,27 +84,27 @@ class StackedBarChart extends Component {
             x: [0, horizontalLength ? horizontalLength : 18],
             y: [0, 600]
           }}
-          width={790}
-          height={400}
+          width={700}
+          height={330}
         >
           <VictoryLabel
             style={this.styles.titleLabel}
             text={title}
-            x={65}
+            x={98}
             y={20}
             textAnchor="middle"
           />
           <VictoryLabel
             style={this.styles.widthsLabel}
-            text="Shoe Widths"
-            x={278}
+            text="Widths"
+            x={658}
             y={15}
             textAnchor="start"
           />
 
           {config.stackColors.map(color => {
             return (
-              <svg viewBox="0 0 175 270">
+              <svg viewBox="0 0 210 270">
                 <VictoryLabel
                   style={this.styles.colorLabels}
                   text={color[0]}
@@ -132,49 +115,25 @@ class StackedBarChart extends Component {
                 <rect
                   x={color[4]}
                   y={color[5]}
-                  width="5"
-                  height="4"
+                  width="10"
+                  height="8"
                   fill={color[1]}
                 />
               </svg>
             );
           })}
-          <VictoryGroup offset={2.8} domainPadding={{ x: [10, -10], y: 0 }}>
-            {/* <VictoryStack style={{ data: { width: 3.7 } }}>
-              <VictoryBar
-                data={[
-                  { x: 1, y: 40, fill: "red", label: "D" },
-                  { x: 2, y: 120, fill: "red", label: "D" },
-                  { x: 7, y: 200, fill: "red", label: "D" },
-                  { x: 8, y: 200, fill: "yellow", label: "D" }
-                ]}
-              />
-            </VictoryStack>
-            <VictoryStack style={{ data: { width: 4 } }}>
-              <VictoryBar
-                data={[
-                  { x: 4, y: 100, fill: "yellow" },
-                  { x: 1, y: 159, fill: "magenta" },
-                  { x: 7, y: 40, fill: "brown" }
-                ]}
-              />
-            </VictoryStack>
-            <VictoryStack style={{ data: { width: 4 } }}>
-              <VictoryBar
-                data={[
-                  { x: 1, y: 100, fill: "magenta" },
-                  { x: 9, y: 159, fill: "green" },
-                  { x: 14, y: 40, fill: "brown" }
-                ]}
-              />
-            </VictoryStack>*/}
-            {this.renderBar().map(data => {
+          <VictoryGroup offset={2.8}>
+            {this.renderBar().map((data, barPosition) => {
               return (
                 <VictoryStack
-                  // animate={this.styles.animate}
-                  style={{ data: { width: 6 }, labels: { fontSize: "0px" } }}
+                  animate={this.styles.animate}
+                  style={{ data: { width: 8 }, labels: { fontSize: "0px" } }}
                 >
-                  <VictoryBar data={data} style={this.styles.bars} />
+                  <VictoryBar
+                    data={data}
+                    style={this.styles.bars}
+                    key={barPosition}
+                  />
                 </VictoryStack>
               );
             })}
@@ -188,35 +147,31 @@ class StackedBarChart extends Component {
           />
           <VictoryAxis
             style={this.styles.horizontalAxis}
-            /*tickValues={[
+            tickValues={[
               0.9,
               1.8,
               2.8,
               3.8,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12,
-              13,
-              14,
-              15,
-              16,
-              17,
-              18
-            ]}*/
+              4.8,
+              5.8,
+              6.8,
+              7.8,
+              8.8,
+              9.8,
+              10.8,
+              11.8,
+              12.8,
+              13.8,
+              14.8,
+              15.8,
+              16.8,
+              17.8
+            ]}
             tickFormat={this.getFeetLengthAmount().sort(
               (last, next) => last - next
             )}
           />
         </VictoryChart>
-        <PaginationButton
-          handlePagination={this.handlePagination}
-          clicked={this.state.clicked}
-        />
       </React.Fragment>
     );
   }
@@ -251,17 +206,17 @@ class StackedBarChart extends Component {
       onload: { duration: 200 }
     },
     colorLabels: {
-      fontSize: "4px",
+      fontSize: "6px",
       fontFamily: "inherit",
       fontWeight: "inherit"
     },
     widthsLabel: {
-      fontSize: "9px",
+      fontSize: "10px",
       fontFamily: "inherit",
       fontWeight: "inherit"
     },
     titleLabel: {
-      fontSize: "12px",
+      fontSize: "10px",
       fontFamily: "inherit",
       fontWeight: "inherit"
     },

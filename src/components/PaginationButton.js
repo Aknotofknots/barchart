@@ -1,9 +1,9 @@
 import React from "react";
 
-const PaginationButton = ({ clicked, handlePagination }) => {
+const PaginationButton = ({ handlePagination }) => {
   return (
     <button className="next-page" onClick={handlePagination}>
-      {clicked ? "Previous chart" : "Next chart"}
+      Next chart
     </button>
   );
 };

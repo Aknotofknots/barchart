@@ -1,8 +1,9 @@
 import { bindActionCreators } from "redux";
-import * as actions from "./actions/action_creators";
+import * as actions from "./actions/actionCreators";
 
 export const mapStateToProps = state => ({
-  shoeSizes: state.shoe_sizes
+  shoeSizes: state.shoeSizes,
+  requestHasError: state.requestHasError
 });
 
 export const mapDispatchToProps = dispatch => ({

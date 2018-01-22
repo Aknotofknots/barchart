@@ -1,29 +1,35 @@
-import { ADD_SHOE_SIZES, ADD_SUBSEQUENT_SHOE_SIZES } from "./action_types";
+import {
+  ADD_SHOE_SIZES,
+  ADD_SUBSEQUENT_SHOE_SIZES,
+  FETCH_FAILURE,
+  FETCH_SUCCESS
+} from "./actionTypes";
 import config from "../../config/config";
 import axios from "axios";
 
 //action creators
+const addShoeSizesFailure = () => ({ type: FETCH_FAILURE });
+const addShoeSizesSuccess = () => ({ type: FETCH_SUCCESS });
 const addShoeSizes = sizes => ({
   type: ADD_SHOE_SIZES,
   sizes
 });
-
-const addSubsequentShoeSizes = sizes => {
-  return {
-    type: ADD_SUBSEQUENT_SHOE_SIZES,
-    sizes
-  };
-};
+const addSubsequentShoeSizes = sizes => ({
+  type: ADD_SUBSEQUENT_SHOE_SIZES,
+  sizes
+});
 
 const addShoeSizesAsync = () => {
   return dispatch => {
     getShoeSizes()
       .then(shoeSizes => shoeSizes)
       .then(shoeSizes => {
-        return dispatch(addShoeSizes(shoeSizes.data));
+        dispatch(addShoeSizesSuccess());
+        dispatch(addShoeSizes(shoeSizes.data));
       })
-      .catch(err => {
-        console.log("Error in network request", err.response.data);
+      .catch(error => {
+        dispatch(addShoeSizesFailure());
+        console.log("Error in network request", error.response.data);
       });
   };
 };
@@ -32,9 +38,13 @@ const addSubsequentShoeSizesAsync = nextPage => {
   return dispatch => {
     getSubsequentShoeSizes(nextPage)
       .then(shoeSizes => shoeSizes)
-      .then(shoeSizes => dispatch(addSubsequentShoeSizes(shoeSizes.data)))
-      .catch(err => {
-        console.log("Error in network request", err.response.data);
+      .then(shoeSizes => {
+        dispatch(addShoeSizesSuccess());
+        dispatch(addSubsequentShoeSizes(shoeSizes.data));
+      })
+      .catch(error => {
+        dispatch(addShoeSizesFailure());
+        console.log("Error in network request", error.response.data);
       });
   };
 };

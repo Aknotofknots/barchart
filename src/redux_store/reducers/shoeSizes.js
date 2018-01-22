@@ -1,4 +1,4 @@
-const shoe_sizes = (state = {}, action) => {
+const shoeSizes = (state = {}, action) => {
   switch (action.type) {
     case "ADD_SHOE_SIZES":
       return {
@@ -8,9 +8,10 @@ const shoe_sizes = (state = {}, action) => {
       };
     case "ADD_SUBSEQUENT_SHOE_SIZES":
       return { ...state, ...action.sizes.data[0] };
+
     default:
       return state;
   }
 };
 
-export default shoe_sizes;
+export default shoeSizes;
